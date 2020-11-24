@@ -310,15 +310,15 @@ class RingDoorBell(RingGeneric):
         except (IndexError, TypeError):
             return None
 
-    @property
+    @property  
     def live_streaming_json(self):
         """Return JSON for live streaming."""
         url = LIVE_STREAMING_ENDPOINT.format(self.id)
         req = self._ring.query(url, method="POST")
-        if req and req.status_code == 204:
+        if req:                                   <------- status code check removed = works fine
             url = DINGS_ENDPOINT
             try:
-                return self._ring.query(url).json()[0]
+                return self._ring.query(url).json()
             except (IndexError, TypeError):
                 pass
         return None
