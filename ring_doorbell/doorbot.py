@@ -315,7 +315,7 @@ class RingDoorBell(RingGeneric):
         """Return JSON for live streaming."""
         url = LIVE_STREAMING_ENDPOINT.format(self.id)
         req = self._ring.query(url, method="POST")
-        if req:                                   <------- status code check removed = works fine
+        if req:                                
             url = DINGS_ENDPOINT
             try:
                 return self._ring.query(url).json()
